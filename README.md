@@ -14,8 +14,7 @@ Keywords: open-source traffic simulation, probability distribution, Python
 
 ## License
 
-Copyright (C) 2022 [Huidae Cho](https://faculty.ung.edu/hcho/) and
-                   Emma Vail
+Copyright (C) 2022 [Huidae Cho](https://faculty.ung.edu/hcho/)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
