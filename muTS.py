@@ -34,7 +34,8 @@ dt = 60 # seconds
 cars_per_day = 100
 speed_limit = 60 # mph
 roads_coors = [[xlim_min, xlim_max], [ylim_min, ylim_max]]
-scale = 10
+scale = 1
+car_size = 5
 
 def calc_coors(along_dist):
     xs, ys = roads_coors
@@ -98,9 +99,9 @@ objs.append(roads_obj)
 car_objs = []
 car_dists = []
 for i in range(cars_per_day):
-    car_dist = -1
+    car_dist = -car_size
     car_dists.append(car_dist)
-    car_obj = plt.Circle(calc_coors(car_dist), 1)
+    car_obj = plt.Circle(calc_coors(car_dist), car_size)
     car_objs.append(car_obj)
     objs.append(car_obj)
 wait_ticks = 0
@@ -118,19 +119,15 @@ def update(tick):
     global wait_ticks, delta_ticks, total_lapse, last_idx
 
     if wait_ticks <= 0:
-        found = False
         for last_idx in range(len(car_dists)):
             if car_dists[last_idx] < 0:
                 car_dists[last_idx] = 0
                 car_objs[last_idx].center = calc_coors(car_dists[last_idx])
-                found = True
                 break
-        if not found:
-            last_idx = len(car_dists)
 
         wait_ticks = delta_ticks = -math.log(random.random()) / cars_per_dt
     else:
-        for i in range(last_idx):
+        for i in range(last_idx+1):
             car_dists[i] += dist_per_dt #* abs(wait_ticks if wait_ticks < 1 else 1)
             car_objs[i].center = calc_coors(car_dists[i])
 
@@ -141,5 +138,5 @@ def update(tick):
 
     return objs
 
-ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=1)
+anim = FuncAnimation(fig, update, init_func=init, blit=True, interval=1)
 plt.show()
