@@ -51,6 +51,7 @@ def calc_coors(along_dist):
     else:
         total_dist = 0
         n = len(xs)
+        found = False
         for i in range(1, n):
             prev_x = xs[i-1]
             prev_y = ys[i-1]
@@ -59,24 +60,28 @@ def calc_coors(along_dist):
             dist = math.sqrt((curr_x - prev_x)**2 + (curr_y - prev_y)**2) * scale
             if along_dist == total_dist + dist:
                 x, y = curr_x, curr_y
+                found = True
                 break
             elif along_dist < total_dist + dist:
                 delta_dist = along_dist - total_dist
                 x = prev_x + (curr_x - prev_x) / dist * delta_dist
                 y = prev_y + (curr_y - prev_y) / dist * delta_dist
+                found = True
                 break
             total_dist += dist
-        if along_dist == total_dist:
-            x, y = xs[n-1], ys[n-1]
-        elif along_dist > total_dist:
-            prev_x = xs[n-2]
-            prev_y = ys[n-2]
-            curr_x = xs[n-1]
-            curr_y = ys[n-1]
-            dist = math.sqrt((curr_x - prev_x)**2 + (curr_y - prev_y)**2) * scale
-            delta_dist = along_dist - total_dist
-            x = prev_x + (curr_x - prev_x) / dist * delta_dist
-            y = prev_y + (curr_y - prev_y) / dist * delta_dist
+        if not found:
+            if along_dist == total_dist:
+                x, y = xs[n-1], ys[n-1]
+            elif along_dist > total_dist:
+                prev_x = xs[n-2]
+                prev_y = ys[n-2]
+                curr_x = xs[n-1]
+                curr_y = ys[n-1]
+                total_dist -= dist
+                dist = math.sqrt((curr_x - prev_x)**2 + (curr_y - prev_y)**2) * scale
+                delta_dist = along_dist - total_dist
+                x = prev_x + (curr_x - prev_x) / dist * delta_dist
+                y = prev_y + (curr_y - prev_y) / dist * delta_dist
     return x, y
 
 cars_per_dt = cars_per_day / 86400 * dt
