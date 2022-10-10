@@ -11,6 +11,7 @@ Keywords: open-source traffic simulation, probability distribution, Python
 
 [FOSS4G 2022 abstract](https://talks.osgeo.org/foss4g-2022/talk/review/QEFTUYCHHGBZYYTYHS3K8XXLEUWUHEXK)
 
+![simulation.gif](simulation.gif "simulation.gif")
 
 ## License
 
