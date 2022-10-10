@@ -6,7 +6,7 @@
 # GitHub:   https://github.com/HuidaeCho/muTS
 # Since:    August 1, 2022
 #
-# Copyright (C) 2022 Huidae Cho <https://idea.isnew.info/>
+# Copyright (C) 2022 Huidae Cho <https://hcho.isnew.info/>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
