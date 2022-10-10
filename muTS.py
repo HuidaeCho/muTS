@@ -36,7 +36,7 @@ speed_limit = 60 # mph
 roads_coors = [[xlim_min, xlim_max], [ylim_min, ylim_max]]
 scale = 1
 car_size = 5
-create_simulation_gif = True
+create_simulation_gif = False
 
 def calc_coors(along_dist):
     xs, ys = roads_coors
@@ -95,14 +95,16 @@ ax.set_aspect("equal")
 ax.axis("off")
 
 objs = []
-roads_obj, = ax.plot([], [], color="gray", linewidth=1)
+roads_obj, = ax.plot([], [], color="gray", linewidth=1, zorder=0)
 objs.append(roads_obj)
 car_objs = []
 car_dists = []
+car_vels = []
 for i in range(2 * cars_per_day):
     car_dist = -car_size
     car_dists.append(car_dist)
-    car_obj = plt.Circle(calc_coors(car_dist), car_size)
+    car_vels.append(np.random.normal(dist_per_dt, 0.25*dist_per_dt))
+    car_obj = plt.Circle(calc_coors(car_dist), car_size, color=np.random.rand(3))
     car_objs.append(car_obj)
     objs.append(car_obj)
 wait_ticks = 0
@@ -136,7 +138,7 @@ def update(tick):
         wait_ticks += delta_ticks
     else:
         for i in range(last_idx+1):
-            car_dists[i] += dist_per_dt #* abs(wait_ticks if wait_ticks < 1 else 1)
+            car_dists[i] += car_vels[i] #dist_per_dt #* abs(wait_ticks if wait_ticks < 1 else 1)
             car_objs[i].center = calc_coors(car_dists[i])
 
         wait_ticks -= 1
