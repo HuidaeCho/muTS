@@ -98,7 +98,7 @@ roads_obj, = ax.plot([], [], color="gray", linewidth=1)
 objs.append(roads_obj)
 car_objs = []
 car_dists = []
-for i in range(cars_per_day):
+for i in range(2 * cars_per_day):
     car_dist = -car_size
     car_dists.append(car_dist)
     car_obj = plt.Circle(calc_coors(car_dist), car_size)
@@ -108,6 +108,7 @@ wait_ticks = 0
 delta_ticks = 0
 total_lapse = 0
 last_idx = 0
+car_count = 0
 
 def init():
     roads_obj.set_data(roads_coors[0], roads_coors[1])
@@ -116,13 +117,14 @@ def init():
     return objs
 
 def update(tick):
-    global wait_ticks, delta_ticks, total_lapse, last_idx
+    global wait_ticks, delta_ticks, total_lapse, last_idx, car_count
 
     if wait_ticks <= 0:
         for last_idx in range(len(car_dists)):
             if car_dists[last_idx] < 0:
                 car_dists[last_idx] = 0
                 car_objs[last_idx].center = calc_coors(car_dists[last_idx])
+                car_count += 1
                 break
 
         wait_ticks = delta_ticks = -math.log(random.random()) / cars_per_dt
@@ -134,7 +136,7 @@ def update(tick):
         wait_ticks -= 1
     total_lapse += dt
 
-    print("====", tick, "====", wait_ticks, delta_ticks, total_lapse, cars_per_dt)
+    print("====", tick, "====", wait_ticks, delta_ticks, total_lapse, car_count, cars_per_dt)
 
     return objs
 
