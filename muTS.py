@@ -36,6 +36,7 @@ speed_limit = 60 # mph
 roads_coors = [[xlim_min, xlim_max], [ylim_min, ylim_max]]
 scale = 1
 car_size = 5
+create_simulation_gif = True
 
 def calc_coors(along_dist):
     xs, ys = roads_coors
@@ -110,6 +111,8 @@ total_lapse = 0
 last_idx = 0
 car_count = 0
 
+label = ax.text(100, 0, "")
+
 def init():
     roads_obj.set_data(roads_coors[0], roads_coors[1])
     for car_obj in car_objs:
@@ -127,7 +130,10 @@ def update(tick):
                 car_count += 1
                 break
 
-        wait_ticks = delta_ticks = -math.log(random.random()) / cars_per_dt
+        delta_ticks = -math.log(random.random()) / cars_per_dt
+        if -wait_ticks >= delta_ticks:
+            print("Woops! Time resolution too high!")
+        wait_ticks += delta_ticks
     else:
         for i in range(last_idx+1):
             car_dists[i] += dist_per_dt #* abs(wait_ticks if wait_ticks < 1 else 1)
@@ -135,12 +141,15 @@ def update(tick):
 
         wait_ticks -= 1
     total_lapse += dt
+    label.set_text(f"{car_count} cars in {round(total_lapse/60/60, 1)} hours")
 
     print("====", tick, "====", wait_ticks, delta_ticks, total_lapse, car_count, cars_per_dt)
 
     return objs
 
-anim = FuncAnimation(fig, update, init_func=init, blit=True, interval=1)
-plt.show()
-#anim = FuncAnimation(fig, update, init_func=init, blit=True, interval=1, save_count=1440)
-#anim.save("simulation.gif")
+if create_simulation_gif:
+    anim = FuncAnimation(fig, update, init_func=init, interval=1, save_count=2880)
+    anim.save("simulation.gif")
+else:
+    anim = FuncAnimation(fig, update, init_func=init, interval=1)
+    plt.show()
