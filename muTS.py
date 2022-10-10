@@ -142,3 +142,5 @@ def update(tick):
 
 anim = FuncAnimation(fig, update, init_func=init, blit=True, interval=1)
 plt.show()
+#anim = FuncAnimation(fig, update, init_func=init, blit=True, interval=1, save_count=1440)
+#anim.save("simulation.gif")
