@@ -15,6 +15,12 @@ Keywords: open-source traffic simulation, probability distribution, Python
 
 ![simulation.gif](simulation.gif "simulation.gif")
 
+## TODO
+
+* Objectify cars
+* Apply different vehicle types with different statistics
+* Use real road network data
+
 ## References
 
 Berry, D. S. and Belmont, D. M., 1951. Distribution of Vehicle Speeds and Travel Times. Proceedings of the Second Berkeley Symposium on Mathematical Statistics and Probability (2), 589-602. [Online](https://projecteuclid.org/proceedings/berkeley-symposium-on-mathematical-statistics-and-probability/Proceedings-of-the-Second-Berkeley-Symposium-on-Mathematical-Statistics-and/Chapter/Distribution-of-Vehicle-Speeds-and-Travel-Times/bsmsp/1200500257), [PDF](https://digitalassets.lib.berkeley.edu/math/ucb/text/math_s2_article-43.pdf).
