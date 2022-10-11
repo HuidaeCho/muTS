@@ -19,6 +19,7 @@ Keywords: open-source traffic simulation, probability distribution, Python
 
 * Objectify cars
 * Apply different vehicle types with different statistics
+* Use a left-skewed distribution for vehicle speeds
 * Use real road network data
 
 ## References
