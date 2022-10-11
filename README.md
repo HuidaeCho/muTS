@@ -9,7 +9,7 @@ As highway infrastructure and environmental land use take priority, traffic simu
 
 Keywords: open-source traffic simulation, probability distribution, Python
 
-[FOSS4G 2022 abstract](https://talks.osgeo.org/foss4g-2022/talk/review/QEFTUYCHHGBZYYTYHS3K8XXLEUWUHEXK)
+[FOSS4G 2022 abstract](https://talks.osgeo.org/foss4g-2022/talk/review/QEFTUYCHHGBZYYTYHS3K8XXLEUWUHEXK) (not presented)
 
 ## Demo for 100 cars per day
 
